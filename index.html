@@ -1,43 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Juego del Impostor</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Pantalla de inicio -->
-  <div id="inicio" class="pantalla activa">
-    <div class="logo-container">
-      <img src="logo.png" alt="Logo" class="logo">
-      <h1>Juego del Impostor</h1>
+
+  <!-- PANTALLA: INICIO -->
+  <section id="screen-setup" class="screen visible">
+    <img src="logo.png" alt="Logo impostor" class="logo"/>
+    <h1 class="title">Juego del Impostor</h1>
+
+    <div class="card">
+      <h2>Categorías</h2>
+      <div class="category-row">
+        <button id="btn-futbolistas" class="btn" onclick="selectCategory('futbolistas','btn-futbolistas')">⚽ Futbolistas</button>
+        <!-- Podés sumar más categorías luego -->
+      </div>
     </div>
 
-    <div class="input-section">
-      <label for="numJugadores">Número de jugadores (máx. 150)</label>
-      <input type="number" id="numJugadores" min="3" max="150" value="5">
-
-      <label for="numImpostores">Número de impostores (1 - 6)</label>
-      <input type="number" id="numImpostores" min="1" max="6" value="1">
-
-      <button id="iniciarBtn">Iniciar juego</button>
+    <div class="card">
+      <h2>Palabras personalizadas</h2>
+      <div class="input-row">
+        <input type="text" id="wordInput" placeholder="Ingresa una palabra" />
+        <button class="btn" onclick="addWord()">Agregar</button>
+      </div>
+      <p id="wordList" class="wordlist"></p>
     </div>
-  </div>
 
-  <!-- Pantalla de roles -->
-  <div id="roles" class="pantalla">
-    <h2 id="jugadorTitulo">Jugador 1</h2>
-    <button id="mostrarRolBtn">Mostrar mi rol</button>
-    <p id="rolTexto"></p>
-    <button id="siguienteJugadorBtn" style="display:none;">Siguiente jugador</button>
-  </div>
+    <div class="card">
+      <h2>Jugadores e impostores</h2>
+      <div class="grid-2">
+        <div>
+          <label for="playerCount">Número de jugadores (1–20)</label>
+          <input type="number" id="playerCount" min="1" max="20" />
+        </div>
+        <div>
+          <label for="impostorCount">Número de impostores (1–6)</label>
+          <input type="number" id="impostorCount" min="1" max="6" />
+        </div>
+      </div>
+    </div>
 
-  <!-- Pantalla final -->
-  <div id="final" class="pantalla">
-    <h2>¡Diviértanse y ganen!</h2>
-    <button id="volverInicioBtn">Volver al inicio</button>
-  </div>
+    <button class="btn start-btn" onclick="startGame()">Iniciar juego</button>
+  </section>
+
+  <!-- PANTALLA: CARTAS/JUGADORES -->
+  <section id="screen-game" class="screen">
+    <h2 id="playerLabel"></h2>
+    <button id="cardButton" class="btn big" onclick="revealCard()">Ver carta</button>
+  </section>
+
+  <!-- PANTALLA: FINAL -->
+  <section id="screen-end" class="screen">
+    <img src="logo.png" alt="Logo impostor" class="logo small"/>
+    <h2 class="title end-title">¡Diviértanse y ganen!</h2>
+    <button class="btn reset-btn" onclick="resetGame()">Volver al inicio</button>
+  </section>
 
   <script src="script.js"></script>
 </body>
