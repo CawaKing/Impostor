@@ -1,6 +1,7 @@
 // ===== CATEGORÍAS PREDEFINIDAS =====
 const categories = {
   futbolistas: [
+    // --- Los 50 originales ---
     "Lionel Messi","Cristiano Ronaldo","Neymar Jr","Kylian Mbappé","Mohamed Salah",
     "Robert Lewandowski","Luka Modrić","Sergio Ramos","Kevin De Bruyne","Eden Hazard",
     "Karim Benzema","Harry Kane","Virgil van Dijk","Sadio Mané","Paul Pogba",
@@ -10,9 +11,33 @@ const categories = {
     "N’Golo Kanté","Marco Verratti","Isco Alarcón","Lorenzo Insigne","Romelu Lukaku",
     "Pierre-Emerick Aubameyang","Mauro Icardi","Mats Hummels","Toni Kroos","Xavi Hernández",
     "Andrés Iniesta","Wayne Rooney","Iker Casillas","Gianluigi Buffon","Kaká",
-    "Ronaldinho","David Beckham","Didier Drogba","Franck Ribéry","Mesut Özil"
+    "Ronaldinho","David Beckham","Didier Drogba","Franck Ribéry","Mesut Özil",
+
+    // --- 100 jugadores actuales ---
+    "Ousmane Dembélé","Lamine Yamal","Viktor Gyökeres","Jude Bellingham","Pedri",
+    "Gavi","Frenkie de Jong","Ronald Araújo","João Félix","Ferran Torres",
+    "Ansu Fati","Raphinha","Alejandro Balde","Marc-André ter Stegen","Ilkay Gündogan",
+    "Robert Sánchez","Dani Olmo","Rodri","Aymeric Laporte","David Raya",
+    "Bukayo Saka","Declan Rice","Gabriel Jesus","Martin Ødegaard","William Saliba",
+    "Kai Havertz","Ben White","Aaron Ramsdale","Takehiro Tomiyasu","Eddie Nketiah",
+    "Erling Haaland","Phil Foden","Jack Grealish","Bernardo Silva","Rúben Dias",
+    "Julián Álvarez","Ederson","Kyle Walker","John Stones","Mateo Kovačić",
+    "Marcus Rashford","Bruno Fernandes","Casemiro","Lisandro Martínez","André Onana",
+    "Raphaël Varane","Antony","Rasmus Højlund","Mason Mount","Luke Shaw",
+    "Darwin Núñez","Alexis Mac Allister","Dominik Szoboszlai","Alisson Becker","Virgil van Dijk",
+    "Luis Díaz","Cody Gakpo","Trent Alexander-Arnold","Andrew Robertson","Diogo Jota",
+    "Son Heung-min","James Maddison","Richarlison","Dejan Kulusevski","Cristian Romero",
+    "Manor Solomon","Pedro Porro","Yves Bissouma","Giovani Lo Celso","Micky van de Ven",
+    "Victor Osimhen","Khvicha Kvaratskhelia","André-Frank Zambo Anguissa","Piotr Zieliński","Giovanni Di Lorenzo",
+    "Mike Maignan","Rafael Leão","Theo Hernández","Olivier Giroud","Christian Pulisic",
+    "Fikayo Tomori","Sandro Tonali","Alessandro Bastoni","Nicolo Barella","Lautaro Martínez",
+    "Marcus Thuram","Hakan Çalhanoğlu","Denzel Dumfries","Federico Dimarco","Yann Sommer",
+    "Achraf Hakimi","Gianluigi Donnarumma","Kylian Mbappé","Marquinhos","Warren Zaïre-Emery",
+    "Randal Kolo Muani","Olivier Dembélé","Milan Škriniar","Lucas Hernández","Nuno Mendes",
+    "Florian Wirtz","Jamal Musiala","Joshua Kimmich","Leon Goretzka","Harry Kane (Bayern)"
   ]
 };
+
 
 // ===== ESTADO DEL JUEGO =====
 let words = [];            // todas las palabras disponibles
