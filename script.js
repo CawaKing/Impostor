@@ -33,8 +33,8 @@ const categories = {
     "Fikayo Tomori","Sandro Tonali","Alessandro Bastoni","Nicolo Barella","Lautaro Martínez",
     "Marcus Thuram","Hakan Çalhanoğlu","Denzel Dumfries","Federico Dimarco","Yann Sommer",
     "Achraf Hakimi","Gianluigi Donnarumma","Kylian Mbappé","Marquinhos","Warren Zaïre-Emery",
-    "Randal Kolo Muani","Olivier Dembélé","Milan Škriniar","Lucas Hernández","Nuno Mendes",
-    "Florian Wirtz","Jamal Musiala","Joshua Kimmich","Leon Goretzka","Harry Kane (Bayern)"
+    "Randal Kolo Muani","Milan Škriniar","Lucas Hernández","Nuno Mendes",
+    "Florian Wirtz","Jamal Musiala","Joshua Kimmich","Leon Goretzka","Harry Kane"
   ]
 };
 
