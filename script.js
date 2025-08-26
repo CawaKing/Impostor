@@ -1,81 +1,167 @@
-let numJugadores, numImpostores;
-let palabraElegida = "Messi"; // luego se puede hacer aleatorio con categorías
-let impostores = [];
-let jugadorActual = 1;
+// ===== CATEGORÍAS PREDEFINIDAS =====
+const categories = {
+  futbolistas: [
+    "Lionel Messi","Cristiano Ronaldo","Neymar Jr","Kylian Mbappé","Mohamed Salah",
+    "Robert Lewandowski","Luka Modrić","Sergio Ramos","Kevin De Bruyne","Eden Hazard",
+    "Karim Benzema","Harry Kane","Virgil van Dijk","Sadio Mané","Paul Pogba",
+    "Gareth Bale","Zlatan Ibrahimović","Luis Suárez","David De Gea","Manuel Neuer",
+    "Thibaut Courtois","Philippe Coutinho","Antoine Griezmann","Gerard Piqué","Sergio Agüero",
+    "Cesc Fàbregas","Ángel Di María","James Rodríguez","Radamel Falcao","Diego Costa",
+    "N’Golo Kanté","Marco Verratti","Isco Alarcón","Lorenzo Insigne","Romelu Lukaku",
+    "Pierre-Emerick Aubameyang","Mauro Icardi","Mats Hummels","Toni Kroos","Xavi Hernández",
+    "Andrés Iniesta","Wayne Rooney","Iker Casillas","Gianluigi Buffon","Kaká",
+    "Ronaldinho","David Beckham","Didier Drogba","Franck Ribéry","Mesut Özil"
+  ]
+};
 
-const inicio = document.getElementById("inicio");
-const roles = document.getElementById("roles");
-const finalPantalla = document.getElementById("final");
+// ===== ESTADO DEL JUEGO =====
+let words = [];            // todas las palabras disponibles
+let players = [];          // [{name, role, word}]
+let playerCount = 0;
+let impostorCount = 1;
+let currentPlayer = 0;
+let impostors = [];
+let selectedCategories = new Set();
 
-const iniciarBtn = document.getElementById("iniciarBtn");
-const mostrarRolBtn = document.getElementById("mostrarRolBtn");
-const siguienteJugadorBtn = document.getElementById("siguienteJugadorBtn");
-const volverInicioBtn = document.getElementById("volverInicioBtn");
+// ===== UTILIDADES DE UI =====
+const $ = (id) => document.getElementById(id);
+const show = (id) => $(id).classList.add('visible');
+const hide = (id) => $(id).classList.remove('visible');
 
-const jugadorTitulo = document.getElementById("jugadorTitulo");
-const rolTexto = document.getElementById("rolTexto");
-
-iniciarBtn.addEventListener("click", () => {
-  numJugadores = parseInt(document.getElementById("numJugadores").value);
-  numImpostores = parseInt(document.getElementById("numImpostores").value);
-
-  if (numJugadores < 3 || numJugadores > 150) {
-    alert("El número de jugadores debe estar entre 3 y 150");
-    return;
-  }
-
-  if (numImpostores < 1 || numImpostores > 6) {
-    alert("El número de impostores debe estar entre 1 y 6");
-    return;
-  }
-
-  if (numImpostores >= numJugadores) {
-    alert("Los impostores deben ser menos que los jugadores");
-    return;
-  }
-
-  // Generar impostores aleatorios
-  impostores = [];
-  while (impostores.length < numImpostores) {
-    let rand = Math.floor(Math.random() * numJugadores) + 1;
-    if (!impostores.includes(rand)) impostores.push(rand);
-  }
-
-  inicio.classList.remove("activa");
-  roles.classList.add("activa");
-
-  jugadorActual = 1;
-  actualizarJugador();
-});
-
-function actualizarJugador() {
-  jugadorTitulo.textContent = "Jugador " + jugadorActual;
-  rolTexto.textContent = "";
-  mostrarRolBtn.style.display = "inline-block";
-  siguienteJugadorBtn.style.display = "none";
+function renderWordList(){
+  $('wordList').innerText = words.join(', ');
 }
 
-mostrarRolBtn.addEventListener("click", () => {
-  if (impostores.includes(jugadorActual)) {
-    rolTexto.textContent = "Eres el IMPOSTOR 👀";
-  } else {
-    rolTexto.textContent = "La palabra es: " + palabraElegida;
+// ===== FLUJO: INICIO =====
+function selectCategory(key, btnId){
+  if(!categories[key] || selectedCategories.has(key)) return;
+  selectedCategories.add(key);
+  // unir y evitar duplicados
+  words = Array.from(new Set([...words, ...categories[key]]));
+  renderWordList();
+  // feedback visual
+  const btn = $(btnId);
+  if(btn){
+    btn.disabled = true;
+    btn.textContent = "Cargada ✓";
   }
-  mostrarRolBtn.style.display = "none";
-  siguienteJugadorBtn.style.display = "inline-block";
-});
+}
 
-siguienteJugadorBtn.addEventListener("click", () => {
-  jugadorActual++;
-  if (jugadorActual > numJugadores) {
-    roles.classList.remove("activa");
-    finalPantalla.classList.add("activa");
-  } else {
-    actualizarJugador();
+function addWord(){
+  const input = $('wordInput');
+  const w = (input.value || '').trim();
+  if(!w) return;
+  words = Array.from(new Set([...words, w]));
+  input.value = '';
+  renderWordList();
+}
+
+function startGame(){
+  playerCount = parseInt(($('playerCount').value||'0'),10);
+  impostorCount = parseInt(($('impostorCount').value||'0'),10);
+
+  // Validaciones
+  if(words.length === 0){
+    alert('Agregá al menos una palabra (o una categoría).');
+    return;
   }
-});
+  if(isNaN(playerCount) || playerCount < 1 || playerCount > 20){
+    alert('Número de jugadores inválido (1–20).');
+    return;
+  }
+  if(isNaN(impostorCount) || impostorCount < 1 || impostorCount > 6){
+    alert('Número de impostores inválido (1–6).');
+    return;
+  }
+  if(impostorCount >= playerCount){
+    alert('Debe haber al menos 1 jugador NO impostor.');
+    return;
+  }
 
-volverInicioBtn.addEventListener("click", () => {
-  finalPantalla.classList.remove("activa");
-  inicio.classList.add("activa");
-});
+  // Setup de roles
+  players = [];
+  impostors = [];
+  currentPlayer = 0;
+
+  const pool = Array.from({length: playerCount}, (_, i) => i);
+  while(impostors.length < impostorCount){
+    const idx = Math.floor(Math.random() * pool.length);
+    impostors.push(pool.splice(idx,1)[0]);
+  }
+
+  const randomWord = words[Math.floor(Math.random()*words.length)];
+  for(let i=0;i<playerCount;i++){
+    players.push({
+      name: `Jugador ${i+1}`,
+      role: impostors.includes(i) ? 'Impostor' : 'Jugador',
+      word: randomWord
+    });
+  }
+
+  // Cambiar de pantalla: INICIO -> GAME
+  hide('screen-setup');
+  show('screen-game');
+  $('playerLabel').innerText = players[currentPlayer].name;
+  $('cardButton').innerText = 'Ver carta';
+  $('cardButton').onclick = revealCard;
+}
+
+// ===== FLUJO: CARTAS =====
+function revealCard(){
+  const p = players[currentPlayer];
+  $('cardButton').innerText = (p.role === 'Impostor')
+    ? '¡Eres el impostor!'
+    : `La palabra es: ${p.word}`;
+  $('cardButton').onclick = nextPlayer;
+}
+
+function nextPlayer(){
+  currentPlayer++;
+  if(currentPlayer >= playerCount){
+    goToEndScreen();
+    return;
+  }
+  $('playerLabel').innerText = players[currentPlayer].name;
+  $('cardButton').innerText = 'Ver carta';
+  $('cardButton').onclick = revealCard;
+}
+
+// ===== FLUJO: FINAL =====
+function goToEndScreen(){
+  hide('screen-game');
+  show('screen-end');
+}
+
+// ===== RESET =====
+function resetGame(){
+  // limpiar estado
+  words = [];
+  players = [];
+  currentPlayer = 0;
+  playerCount = 0;
+  impostorCount = 1;
+  impostors = [];
+  selectedCategories.clear();
+
+  // limpiar UI
+  $('wordList').innerText = '';
+  $('wordInput').value = '';
+  $('playerCount').value = '';
+  $('impostorCount').value = '';
+
+  // reactivar botones de categorías
+  const btnF = $('btn-futbolistas');
+  if(btnF){ btnF.disabled = false; btnF.textContent = '⚽ Futbolistas'; }
+
+  hide('screen-end');
+  hide('screen-game');
+  show('screen-setup');
+}
+
+// Exponer funciones al scope global (para los onclick del HTML)
+window.selectCategory = selectCategory;
+window.addWord = addWord;
+window.startGame = startGame;
+window.revealCard = revealCard;
+window.nextPlayer = nextPlayer;
+window.resetGame = resetGame;
