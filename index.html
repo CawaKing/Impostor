@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego del Impostor</title>
+  <title>Impostor</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
@@ -11,14 +11,17 @@
 
   <!-- PANTALLA: INICIO -->
   <section id="screen-setup" class="screen visible">
-    <img src="logo.png" alt="Logo impostor" class="logo"/>
-    <h1 class="title">Juego del Impostor</h1>
+    <img src="attached_assets/1000093049_1756091639053.jpg" alt="Logo impostor" class="logo"/>
+    <h1 class="title"> Impostor</h1>
 
     <div class="card">
       <h2>Categorías</h2>
       <div class="category-row">
         <button id="btn-futbolistas" class="btn" onclick="selectCategory('futbolistas','btn-futbolistas')">⚽ Futbolistas</button>
-        <!-- Podés sumar más categorías luego -->
+        <button id="btn-comidas" class="btn" onclick="selectCategory('comidas','btn-comidas')">🍕 Comidas</button>
+        <button id="btn-animales" class="btn" onclick="selectCategory('animales','btn-animales')">🦁 Animales</button>
+        <button id="btn-colores" class="btn" onclick="selectCategory('colores','btn-colores')">🌈 Colores</button>
+        <button id="btn-lugares_turisticos" class="btn" onclick="selectCategory('lugares_turisticos','btn-lugares_turisticos')">🏛️ Lugares Turísticos</button>
       </div>
     </div>
 
@@ -56,7 +59,7 @@
 
   <!-- PANTALLA: FINAL -->
   <section id="screen-end" class="screen">
-    <img src="logo.png" alt="Logo impostor" class="logo small"/>
+    <img src="attached_assets/1000093049_1756091639053.jpg" alt="Logo impostor" class="logo small"/>
     <h2 class="title end-title">¡Diviértanse y ganen!</h2>
     <button class="btn reset-btn" onclick="resetGame()">Volver al inicio</button>
   </section>
