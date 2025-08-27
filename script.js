@@ -8,7 +8,7 @@ const categories = {
     "Gareth Bale","Zlatan Ibrahimović","Luis Suárez","David De Gea","Manuel Neuer",
     "Thibaut Courtois","Philippe Coutinho","Antoine Griezmann","Gerard Piqué","Sergio Agüero",
     "Cesc Fàbregas","Ángel Di María","James Rodríguez","Radamel Falcao","Diego Costa",
-    "N’Golo Kanté","Marco Verratti","Isco Alarcón","Lorenzo Insigne","Romelu Lukaku",
+    "N'Golo Kanté","Marco Verratti","Isco Alarcón","Lorenzo Insigne","Romelu Lukaku",
     "Pierre-Emerick Aubameyang","Mauro Icardi","Mats Hummels","Toni Kroos","Xavi Hernández",
     "Andrés Iniesta","Wayne Rooney","Iker Casillas","Gianluigi Buffon","Kaká",
     "Ronaldinho","David Beckham","Didier Drogba","Franck Ribéry","Mesut Özil",
@@ -33,8 +33,40 @@ const categories = {
     "Fikayo Tomori","Sandro Tonali","Alessandro Bastoni","Nicolo Barella","Lautaro Martínez",
     "Marcus Thuram","Hakan Çalhanoğlu","Denzel Dumfries","Federico Dimarco","Yann Sommer",
     "Achraf Hakimi","Gianluigi Donnarumma","Kylian Mbappé","Marquinhos","Warren Zaïre-Emery",
-    "Randal Kolo Muani","Milan Škriniar","Lucas Hernández","Nuno Mendes",
-    "Florian Wirtz","Jamal Musiala","Joshua Kimmich","Leon Goretzka","Harry Kane"
+    "Randal Kolo Muani","Olivier Dembélé","Milan Škriniar","Lucas Hernández","Nuno Mendes",
+    "Florian Wirtz","Jamal Musiala","Joshua Kimmich","Leon Goretzka","Harry Kane (Bayern)"
+  ],
+
+  comidas: [
+    "Pizza","Hamburguesa","Tacos","Sushi","Pasta","Empanadas","Asado","Milanesa","Paella","Risotto",
+    "Lasaña","Ravioles","Gnocchi","Tortilla","Ceviche","Guacamole","Burrito","Quesadilla","Enchilada","Nachos",
+    "Hot Dog","Sandwich","Croissant","Bagel","Donut","Muffin","Pancakes","Waffles","French Toast","Cereales",
+    "Ensalada","Gazpacho","Sopa","Curry","Pad Thai","Ramen","Pho","Tempura","Teriyaki","Yakitori",
+    "Kebab","Falafel","Hummus","Baklava","Tiramisu","Gelato","Cheesecake","Brownie","Cookies","Macarons"
+  ],
+
+  animales: [
+    "León","Tigre","Elefante","Jirafa","Cebra","Hipopótamo","Rinoceronte","Cocodrilo","Serpiente","Águila",
+    "Halcón","Búho","Pingüino","Delfín","Ballena","Tiburón","Pulpo","Medusa","Cangrejo","Langosta",
+    "Mariposa","Abeja","Hormiga","Araña","Escorpión","Rana","Salamandra","Tortuga","Iguana","Camaleón",
+    "Perro","Gato","Conejo","Hamster","Ratón","Caballo","Vaca","Cerdo","Oveja","Cabra",
+    "Panda","Koala","Mono","Gorila","Chimpancé","Orangután","Oso","Lobo","Zorro","Ciervo"
+  ],
+
+  colores: [
+    "Rojo","Azul","Verde","Amarillo","Naranja","Violeta","Rosa","Negro","Blanco","Gris",
+    "Marrón","Beige","Turquesa","Aguamarina","Cian","Magenta","Fucsia","Coral","Salmón","Melocotón",
+    "Lila","Púrpura","Índigo","Añil","Esmeralda","Jade","Oliva","Lima","Menta",
+    "Dorado","Plateado","Bronce","Cobre","Crema","Marfil","Caoba","Chocolate","Café","Canela",
+    "Bermellón","Escarlata","Carmesí","Granate","Burdeos","Navy","Celeste","Cielo","Océano","Marino"
+  ],
+
+  lugares_turisticos: [
+    "Torre Eiffel","Estatua de la Libertad","Coliseo Romano","Machu Picchu","Cristo Redentor","Taj Mahal","Gran Muralla China","Pirámides de Giza","Stonehenge","Acrópolis",
+    "Sagrada Familia","Louvre","Times Square","Central Park","Golden Gate","Hollywood","Big Ben","Tower Bridge","Buckingham Palace","Vaticano",
+    "Santorini","Ibiza","Bali","Maldivas","Cancún","Miami Beach","Copacabana","Río de Janeiro","Buenos Aires","Tango",
+    "Cataratas del Niágara","Cataratas del Iguazú","Salar de Uyuni","Desierto del Sahara","Monte Everest","Kilimanjaro","Alpes","Himalaya","Andes","Patagonia",
+    "Venecia","Florencia","Roma","París","Londres","Nueva York","Tokio","Kioto","Bangkok","Singapur"
   ]
 };
 
@@ -177,6 +209,7 @@ function resetGame(){
   // reactivar botones de categorías
   const btnF = $('btn-futbolistas');
   if(btnF){ btnF.disabled = false; btnF.textContent = '⚽ Futbolistas'; }
+  // Agregar lógica para reactivar los nuevos botones de categoría aquí si es necesario
 
   hide('screen-end');
   hide('screen-game');
