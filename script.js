@@ -56,7 +56,7 @@ const categories = {
   colores: [
     "Rojo","Azul","Verde","Amarillo","Naranja","Violeta","Rosa","Negro","Blanco","Gris",
     "Marrón","Beige","Turquesa","Aguamarina","Cian","Magenta","Fucsia","Coral","Salmón","Melocotón",
-    "Lila","Púrpura","Índigo","Añil","Esmeralda","Jade","Oliva","Lima","Menta",
+    "Lavanda","Lila","Púrpura","Índigo","Añil","Esmeralda","Jade","Oliva","Lima","Menta",
     "Dorado","Plateado","Bronce","Cobre","Crema","Marfil","Caoba","Chocolate","Café","Canela",
     "Bermellón","Escarlata","Carmesí","Granate","Burdeos","Navy","Celeste","Cielo","Océano","Marino"
   ],
@@ -209,7 +209,18 @@ function resetGame(){
   // reactivar botones de categorías
   const btnF = $('btn-futbolistas');
   if(btnF){ btnF.disabled = false; btnF.textContent = '⚽ Futbolistas'; }
-  // Agregar lógica para reactivar los nuevos botones de categoría aquí si es necesario
+  
+  const btnC = $('btn-comidas');
+  if(btnC){ btnC.disabled = false; btnC.textContent = '🍕 Comidas'; }
+  
+  const btnA = $('btn-animales');
+  if(btnA){ btnA.disabled = false; btnA.textContent = '🦁 Animales'; }
+  
+  const btnCol = $('btn-colores');
+  if(btnCol){ btnCol.disabled = false; btnCol.textContent = '🌈 Colores'; }
+  
+  const btnL = $('btn-lugares_turisticos');
+  if(btnL){ btnL.disabled = false; btnL.textContent = '🏛️ Lugares Turísticos'; }
 
   hide('screen-end');
   hide('screen-game');
